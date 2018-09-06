@@ -4,6 +4,8 @@ import numpy as np
 import cv2
 import sys
 
+alpha=0.5
+
 # Read points from text file
 def readPoints(path) :
     # Create an array of points.
@@ -43,8 +45,8 @@ def morphTriangle(img1, img2, img, t1, t2, t, alpha) :
     t2Rect = []
     tRect = []
 
-
-    for i in xrange(0, 3):
+    for i in range(0, 3):
+    # for i in xrange(0, 3):
         tRect.append(((t[i][0] - r[0]),(t[i][1] - r[1])))
         t1Rect.append(((t1[i][0] - r1[0]),(t1[i][1] - r1[1])))
         t2Rect.append(((t2[i][0] - r2[0]),(t2[i][1] - r2[1])))
@@ -72,8 +74,7 @@ def morphTriangle(img1, img2, img, t1, t2, t, alpha) :
 if __name__ == '__main__' :
 
     filename1 = 'hillary_clinton.jpg'
-    filename2 = 'ted_cruz.jpg'
-    alpha = 0.5
+    filename2 = 'narumi_2.jpg'
     
     # Read images
     img1 = cv2.imread(filename1);
@@ -89,7 +90,8 @@ if __name__ == '__main__' :
     points = [];
 
     # Compute weighted average point coordinates
-    for i in xrange(0, len(points1)):
+    for i in range(0, len(points1)):
+    # for i in xrange(0, len(points1)):
         x = ( 1 - alpha ) * points1[i][0] + alpha * points2[i][0]
         y = ( 1 - alpha ) * points1[i][1] + alpha * points2[i][1]
         points.append((x,y))
